@@ -1,4 +1,4 @@
-package com.github.february.rakuten.rakutencollector;
+package com.github.february.rakuten.collector;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
