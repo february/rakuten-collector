@@ -66,13 +66,16 @@
 		<dependency>
         	<groupId>net.sourceforge.htmlunit</groupId>
         	<artifactId>htmlunit</artifactId>
-        	<version>2.33</version>
     	</dependency>
 		<dependency>
 			<!-- jsoup HTML parser library @ https://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.11.3</version>
+		</dependency>
+		<dependency>
+		  	<groupId>org.apache.commons</groupId>
+		  	<artifactId>commons-pool2</artifactId>
 		</dependency>
 	</dependencies>
 
