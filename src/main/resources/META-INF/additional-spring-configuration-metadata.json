@@ -1,5 +1,10 @@
 {"properties": [
   {
+    "name": "browser.tempFolder",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
     "name": "browser.webclient.pool.max-total",
     "type": "java.lang.String",
     "description": "A description for 'browser.webclient.pool.max-total'"

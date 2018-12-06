@@ -1,4 +1,4 @@
-package com.github.february.rakuten.collector.service;
+package com.github.february.rakuten.collector.analyzer.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +12,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
+import com.github.february.rakuten.collector.analyzer.AvailableShoeSizeAnalyzer;
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
 
 @Component
-public class AnalyzeService {
-	
-	/**
-	 * 取得鞋类产品在售尺寸
-	 * @param html
-	 * @return
-	 */
-	public AvailableShoeSize[] getAvailableShoeSize(String html) {
+public class AbcMartAvailableShoeSizeAnalyzer implements AvailableShoeSizeAnalyzer {
+
+	@Override
+	public AvailableShoeSize[] analyze(String html) {
 		List<AvailableShoeSize> sizeList = new ArrayList<AvailableShoeSize>();
 		List<AvailableShoeSize> result = new ArrayList<AvailableShoeSize>();
 		
@@ -51,7 +48,7 @@ public class AnalyzeService {
 			}
 		}
 		
-		return result.toArray(new AvailableShoeSize[0]);		
+		return result.toArray(new AvailableShoeSize[0]);
 	}
 
 }

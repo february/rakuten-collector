@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class IchibaItemSearchResult implements Serializable {
+public class RakutenIchibaItemSearchResult implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class IchibaItemSearchResult implements Serializable {
 	private int pageCount;	
 	
 	@JsonProperty("Items")
-	private List<IchibaItem> items;
+	private List<RakutenIchibaItem> items;
 	
 	public int getCount() {
 		return count;
@@ -69,10 +69,10 @@ public class IchibaItemSearchResult implements Serializable {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
-	public List<IchibaItem> getItems() {
+	public List<RakutenIchibaItem> getItems() {
 		return items;
 	}
-	public void setItems(List<IchibaItem> items) {
+	public void setItems(List<RakutenIchibaItem> items) {
 		this.items = items;
 	}
 	

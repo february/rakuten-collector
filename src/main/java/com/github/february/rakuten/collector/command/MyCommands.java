@@ -1,33 +1,51 @@
 package com.github.february.rakuten.collector.command;
 
-import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.github.february.rakuten.collector.analyzer.impl.AbcMartAvailableShoeSizeAnalyzer;
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
-import com.github.february.rakuten.collector.service.AnalyzeService;
-import com.github.february.rakuten.collector.service.BrowserService;
+import com.github.february.rakuten.collector.bean.RakutenIchibaItem;
+import com.github.february.rakuten.collector.bean.RakutenIchibaItemSearchResult;
+import com.github.february.rakuten.collector.service.HttpService;
 import com.github.february.rakuten.collector.service.RakutenService;
 
 @ShellComponent
 public class MyCommands {
-
-	@Autowired
-	AnalyzeService analyzeService;
 	
 	@Autowired
-	BrowserService browserService;	
+	HttpService httpService;	
 	
 	@Autowired
 	RakutenService rakutenService;
 	
+	@Autowired
+	AbcMartAvailableShoeSizeAnalyzer abcMartAvailableShoeSizeAnalyzer;
+	
 	@ShellMethod("Add two integers together.")
-    public int dec(int a, int b) throws JsonParseException, JsonMappingException, IOException {
-		rakutenService.ichibaItemSearch();
+    public int dec(int a, int b) throws Exception {
+		RakutenIchibaItemSearchResult result = rakutenService.ichibaItemSearch();
+		
+		List<RakutenIchibaItem> items = result.getItems();
+		for(RakutenIchibaItem item : items) {
+			System.out.println(item.getItemUrl());
+			String pageXml = httpService.getPage(item.getItemUrl());
+			AvailableShoeSize[] sizes = abcMartAvailableShoeSizeAnalyzer.analyze(pageXml);
+			for(AvailableShoeSize size : sizes) {
+				System.out.println(size.getValue());
+			}
+			
+			String[] urls = item.getMediumImageUrls();
+			for(int i=0; i<urls.length; i++) {
+				urls[i] = urls[i].replace("?_ex=128x128", "");
+			}
+			
+			httpService.downloadJpg(urls);
+		}
+		
 		return a-b;
 	}
     
@@ -38,8 +56,8 @@ public class MyCommands {
 
         String pageXml;
 		try {
-			pageXml = browserService.getPage("https://item.rakuten.co.jp/abc-mart/5735140002/");
-			AvailableShoeSize[] sizes = analyzeService.getAvailableShoeSize(pageXml);
+			pageXml = httpService.getPage("https://item.rakuten.co.jp/abc-mart/5735140002/");
+			AvailableShoeSize[] sizes = abcMartAvailableShoeSizeAnalyzer.analyze(pageXml);
 			for(AvailableShoeSize size : sizes) {
 				System.out.println(size.getValue());
 			}

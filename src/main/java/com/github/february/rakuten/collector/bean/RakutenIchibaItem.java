@@ -2,7 +2,7 @@ package com.github.february.rakuten.collector.bean;
 
 import java.io.Serializable;
 
-public class IchibaItem implements Serializable {
+public class RakutenIchibaItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
