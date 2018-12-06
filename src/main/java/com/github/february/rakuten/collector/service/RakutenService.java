@@ -11,7 +11,7 @@ import com.github.february.rakuten.collector.bean.IchibaItemSearchResult;
 import com.github.february.rakuten.collector.config.RakutenConfig;
 
 @Component
-public class ApiService {
+public class RakutenService {
 	
 	@Autowired
 	RakutenConfig rakutenConfig;
@@ -19,7 +19,7 @@ public class ApiService {
 	@Autowired
 	RestTemplate restTemplate;
 	
-	public void run() {
+	public void ichibaItemSearch() {
 		String url = rakutenConfig.getUrl().getIchibaItem();
 		Map<String, String> uriVariables = new HashMap<String, String>();
 		uriVariables.put("applicationId", rakutenConfig.getApplicationId());
