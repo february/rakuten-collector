@@ -1,3 +1,10 @@
+rakuten: 
+  affiliate-id: 13406ea7.b5417f7e.13406ea8.ad6170f5
+  application-id: 1026851104524982363
+  format: json
+  format-version: 2
+  url:
+    ichiba-item: https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706 
 browser:
   webclient: 
     pool: 

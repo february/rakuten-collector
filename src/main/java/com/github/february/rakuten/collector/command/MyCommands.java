@@ -6,6 +6,7 @@ import org.springframework.shell.standard.ShellMethod;
 
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
 import com.github.february.rakuten.collector.service.AnalyzeService;
+import com.github.february.rakuten.collector.service.ApiService;
 import com.github.february.rakuten.collector.service.BrowserService;
 
 @ShellComponent
@@ -16,10 +17,20 @@ public class MyCommands {
 	
 	@Autowired
 	BrowserService browserService;	
+	
+	@Autowired
+	ApiService apiService;
+	
+	@ShellMethod("Add two integers together.")
+    public int dec(int a, int b) {
+		apiService.run();
+		return a-b;
+	}
     
     @ShellMethod("Add two integers together.")
     public int add(int a, int b) {
         // https://item.rakuten.co.jp/abc-mart/5735140002/
+
 
         String pageXml;
 		try {
