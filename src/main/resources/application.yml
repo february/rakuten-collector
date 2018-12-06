@@ -1,0 +1,7 @@
+browser:
+  webclient: 
+    pool: 
+      maxTotal: 10
+      maxIdle: 10
+      minIdle: 0
+      maxWaitMillis: 5000

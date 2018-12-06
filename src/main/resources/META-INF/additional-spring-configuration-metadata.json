@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "browser.webclient.pool.max-total",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.webclient.pool.max-total'"
+  },
+  {
+    "name": "browser.webclient.pool.max-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.webclient.pool.max-idle'"
+  },
+  {
+    "name": "browser.webclient.pool.min-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.webclient.pool.min-idle'"
+  },
+  {
+    "name": "browser.webclient.pool.max-wait-millis",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.webclient.pool.max-wait-millis'"
+  }
+]}
