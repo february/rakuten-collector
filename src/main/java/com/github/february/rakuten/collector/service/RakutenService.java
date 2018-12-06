@@ -13,6 +13,11 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.github.february.rakuten.collector.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.collector.config.RakutenConfig;
 
+/**
+ * 乐天市场访问服务
+ * @author zhanghao
+ *
+ */
 @Component
 public class RakutenService {
 
