@@ -8,11 +8,11 @@ import org.springframework.shell.standard.ShellMethod;
 
 import com.github.february.rakuten.collector.analyzer.impl.AbcMartAvailableShoeSizeAnalyzer;
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
-import com.github.february.rakuten.collector.bean.RakutenIchibaItem;
-import com.github.february.rakuten.collector.bean.RakutenIchibaItemSearchParam;
-import com.github.february.rakuten.collector.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.collector.service.HttpService;
-import com.github.february.rakuten.collector.service.RakutenService;
+import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
+import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
+import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
+import com.github.february.rakuten.sdk.service.RakutenService;
 
 @ShellComponent
 public class MyCommands {
