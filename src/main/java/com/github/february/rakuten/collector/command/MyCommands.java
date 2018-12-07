@@ -9,6 +9,7 @@ import org.springframework.shell.standard.ShellMethod;
 import com.github.february.rakuten.collector.analyzer.impl.AbcMartAvailableShoeSizeAnalyzer;
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
 import com.github.february.rakuten.collector.bean.RakutenIchibaItem;
+import com.github.february.rakuten.collector.bean.RakutenIchibaItemSearchParam;
 import com.github.february.rakuten.collector.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.collector.service.HttpService;
 import com.github.february.rakuten.collector.service.RakutenService;
@@ -27,7 +28,10 @@ public class MyCommands {
 	
 	@ShellMethod("Add two integers together.")
     public int dec(int a, int b) throws Exception {
-		RakutenIchibaItemSearchResult result = rakutenService.ichibaItemSearch();
+		RakutenIchibaItemSearchParam param = new RakutenIchibaItemSearchParam();
+		param.setShopCode("abc-mart");
+		param.setKeyword("キッズ スニーカー");
+		RakutenIchibaItemSearchResult result = rakutenService.ichibaItemSearch(param);
 		
 		List<RakutenIchibaItem> items = result.getItems();
 		for(RakutenIchibaItem item : items) {
