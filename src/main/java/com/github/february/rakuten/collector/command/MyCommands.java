@@ -14,6 +14,8 @@ import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.sdk.service.RakutenService;
+import com.weidian.open.sdk.entity.Item;
+import com.weidian.open.sdk.entity.Sku;
 
 @ShellComponent
 public class MyCommands {
@@ -33,8 +35,8 @@ public class MyCommands {
 	@ShellMethod("Add two integers together.")
     public int db(int a, int b) throws Exception {
 		weidian.uploadImage(new String[] {
-				"/Users/zhanghao/Downloads/timg.jpeg",
-				"/Users/zhanghao/Downloads/www1.jpeg"
+				"/Users/zhanghao/Downloads/rakuten/2018120822304055330.jpg",
+				"/Users/zhanghao/Downloads/rakuten/2018120822304115788.jpg"
 		});
 		return 5;
 	}

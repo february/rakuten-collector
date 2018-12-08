@@ -1,5 +1,7 @@
 package com.github.february.rakuten.collector.pool;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.PooledObjectFactory;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
@@ -11,14 +13,15 @@ import com.gargoylesoftware.htmlunit.WebClient;
 @Component
 public class PooledWebClientFactory implements PooledObjectFactory<WebClient> {
 	
+	private static final Log logger = LogFactory.getLog(PooledWebClientFactory.class);
+	
 	public PooledWebClientFactory(){
-		System.out.println("init WebClient factory");
+		logger.info("WebClientPool is initialized");
     }
 
 	@Override
 	public void activateObject(PooledObject<WebClient> arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
+		logger.info("WebClient instance is activated");	
 	}
 
 	@Override
@@ -27,7 +30,7 @@ public class PooledWebClientFactory implements PooledObjectFactory<WebClient> {
         if(webClient != null){
         	webClient.close();
         	webClient = null;
-            System.out.println("WebClient destroy");
+            logger.info("WebClient instance is destroy");
         }
 		
 	}
@@ -45,8 +48,7 @@ public class PooledWebClientFactory implements PooledObjectFactory<WebClient> {
 
 	@Override
 	public void passivateObject(PooledObject<WebClient> arg0) throws Exception {
-		System.out.println("return WebClient item");
-		
+		logger.info("WebClient instance is released");		
 	}
 
 	@Override

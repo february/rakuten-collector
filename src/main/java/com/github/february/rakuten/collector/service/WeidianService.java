@@ -94,7 +94,7 @@ public final class WeidianService {
 					urlList.add(url);
 					logger.info(path + " uploaded successfully and forward to " + url);
 				} else {
-					logger.error(path + " upload failed");
+					logger.error(path + " upload failed and cause of " + response.getStatus().getStatusReason());
 				}
 			} catch (Exception ex) {
 				logger.error(path + " upload failed and cause of " + ex.getMessage());
@@ -115,7 +115,7 @@ public final class WeidianService {
 	        	String itemId = result.get("itemid");
 	        	logger.info(item.getItemName() + " put on sale successfully and itemid is " + itemId);
 	        } else {
-	        	logger.error(item.getItemName() + " put on sale failed");
+	        	logger.error(item.getItemName() + " put on sale failed and cause of " + response.getStatus().getStatusReason());
 	        }
 	      } catch (OpenException e) {
 	    	  logger.error(item.getItemName() + " put on sale failed and cause of " + e.getMessage());

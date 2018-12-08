@@ -1,21 +1,25 @@
 package com.github.february.rakuten.collector.service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.github.february.rakuten.collector.pool.WebClientPool;
@@ -23,6 +27,8 @@ import com.github.february.rakuten.collector.pool.WebClientPool;
 @Component
 @ConfigurationProperties
 public class HttpService {
+	
+	private static final Log logger = LogFactory.getLog(HttpService.class);
 	
 	@Autowired
 	WebClientPool webClientPool;
@@ -50,16 +56,14 @@ public class HttpService {
 	public String[] download(String[] urls, String extName) throws Exception {
 		List<String> filePathList = new ArrayList<String>();
 		WebClient webClient = webClientPool.borrowObject();
-		try {
-			for(String url : urls) {
-				System.out.println(url);
+		for(String url : urls) {
+			try {
 				filePathList.add(download(webClient, url, extName));
+			} catch (Exception ex) {
+				logger.error(url + " download failed and cause of " + ex.getMessage());
 			}
-		} catch (Exception ex) {
-			throw ex;
-		} finally {
-			webClientPool.returnObject(webClient);
 		}
+		webClientPool.returnObject(webClient);
 		return filePathList.toArray(new String[0]);
 	}
 	
@@ -69,7 +73,7 @@ public class HttpService {
 		try {
 			filePath = download(webClient, url, extName);
 		} catch (Exception ex) {
-			throw ex;
+			logger.error(url + " download failed and cause of " + ex.getMessage());
 		} finally {
 			webClientPool.returnObject(webClient);
 		}
@@ -77,12 +81,28 @@ public class HttpService {
 	}
 	
 	private String download(WebClient webClient, String url, String extName) throws Exception {
-		Page page = webClient.getPage(url);
-		InputStream contentAsStream = page.getWebResponse().getContentAsStream();
 		String filePath = this.tempFolder + "/" + getRandomFileName(extName);
-		OutputStream outputStream = new FileOutputStream(filePath);
-		IOUtils.write(IOUtils.readFully(contentAsStream,(int)page.getWebResponse().getContentLength()), outputStream);
-		webClient.close();
+        try {
+            DataInputStream dataInputStream = new DataInputStream(new URL(url).openStream());
+            FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath));
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = dataInputStream.read(buffer)) > 0) {
+                output.write(buffer, 0, length);
+            }
+            byte[] context=output.toByteArray();
+            fileOutputStream.write(context);
+            dataInputStream.close();
+            fileOutputStream.close();
+            logger.info(url + " downloaded successfully and save to " + filePath);
+        } catch (MalformedURLException e) {
+            throw e;
+        } catch (IOException e) {
+        	throw e;
+        } finally {
+        	webClient.close();
+        }		
 		return filePath;
 	}
 	
