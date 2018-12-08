@@ -1,6 +1,6 @@
 spring: 
   datasource: 
-    url: jdbc:h2:mem:shop17
+    url: jdbc:h2:file:/Users/zhanghao/Documents/H2/shop17
     driver-class-name: org.h2.Driver
     username: shop17
     password: shop17
