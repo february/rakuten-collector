@@ -17,8 +17,11 @@ import com.github.february.rakuten.collector.entity.AccessTokenHistory;
 import com.github.february.rakuten.collector.repository.AccessTokenHistoryRepo;
 import com.weidian.open.sdk.AbstractWeidianClient;
 import com.weidian.open.sdk.DefaultWeidianClient;
+import com.weidian.open.sdk.entity.Item;
+import com.weidian.open.sdk.exception.OpenException;
 import com.weidian.open.sdk.oauth.OAuth;
 import com.weidian.open.sdk.request.product.MediaUploadRequest;
+import com.weidian.open.sdk.request.product.VdianItemAddRequest;
 import com.weidian.open.sdk.response.AbstractResponse;
 import com.weidian.open.sdk.response.oauth.OAuthResponse;
 import com.weidian.open.sdk.util.JsonUtils;
@@ -99,5 +102,23 @@ public final class WeidianService {
 		}
 		return urlList.toArray(new String[0]);
 	}
-
+	
+	public void addItem(Item item) throws Exception {
+		String accessToken = this.getAccessToken();
+		AbstractWeidianClient client = DefaultWeidianClient.getInstance();
+	    try {
+	        AbstractResponse response = client.executePost(new VdianItemAddRequest(accessToken, item));
+	        if (response.getStatus().getStatusCode() == 0) {
+	        	Map<?, ?> resp = JsonUtils.toObject(response.toString(), Map.class);
+	        	@SuppressWarnings("unchecked")
+				Map<String, String> result = (Map<String, String>) resp.get("result");
+	        	String itemId = result.get("itemid");
+	        	logger.info(item.getItemName() + " put on sale successfully and itemid is " + itemId);
+	        } else {
+	        	logger.error(item.getItemName() + " put on sale failed");
+	        }
+	      } catch (OpenException e) {
+	    	  logger.error(item.getItemName() + " put on sale failed and cause of " + e.getMessage());
+	      }	    
+	}
 }
