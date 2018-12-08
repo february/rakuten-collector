@@ -87,6 +87,11 @@
 			<artifactId>rakuten-sdk</artifactId>
 			<version>v1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.weidian</groupId>
+			<artifactId>open_sdk_java</artifactId>
+			<version>1.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
