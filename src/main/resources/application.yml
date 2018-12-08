@@ -1,3 +1,14 @@
+spring: 
+  datasource: 
+    url: jdbc:h2:mem:shop17
+    driver-class-name: org.h2.Driver
+    username: shop17
+    password: shop17
+  h2: 
+    console: 
+      settings: 
+        web-allow-others: true
+      path: /db 
 rakuten: 
   affiliate-id: 13406ea7.b5417f7e.13406ea8.ad6170f5
   application-id: 1026851104524982363
