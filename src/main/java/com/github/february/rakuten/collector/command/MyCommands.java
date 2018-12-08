@@ -32,7 +32,10 @@ public class MyCommands {
 	
 	@ShellMethod("Add two integers together.")
     public int db(int a, int b) throws Exception {
-		System.out.println(weidian.getAccessToken());
+		weidian.uploadImage(new String[] {
+				"/Users/zhanghao/Downloads/timg.jpeg",
+				"/Users/zhanghao/Downloads/www1.jpeg"
+		});
 		return 5;
 	}
 	
