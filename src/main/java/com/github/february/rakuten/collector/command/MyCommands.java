@@ -1,6 +1,5 @@
 package com.github.february.rakuten.collector.command;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,8 @@ import org.springframework.shell.standard.ShellMethod;
 
 import com.github.february.rakuten.collector.analyzer.impl.AbcMartAvailableShoeSizeAnalyzer;
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
-import com.github.february.rakuten.collector.entity.AccessTokenHistory;
-import com.github.february.rakuten.collector.repository.AccessTokenHistoryRepo;
 import com.github.february.rakuten.collector.service.HttpService;
+import com.github.february.rakuten.collector.service.WeidianService;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
@@ -27,18 +25,14 @@ public class MyCommands {
 	RakutenService rakutenService;
 	
 	@Autowired
-    private AccessTokenHistoryRepo accessTokenHistoryRepo;
+	WeidianService weidian;
 	
 	@Autowired
 	AbcMartAvailableShoeSizeAnalyzer abcMartAvailableShoeSizeAnalyzer;
 	
 	@ShellMethod("Add two integers together.")
     public int db(int a, int b) throws Exception {
-		AccessTokenHistory entity = new AccessTokenHistory();
-		entity.setSite("12");
-		entity.setToken("34");
-		entity.setCreateTime(new Date());
-		accessTokenHistoryRepo.save(entity);
+		weidian.refreshAccessToken();
 		return 5;
 	}
 	
