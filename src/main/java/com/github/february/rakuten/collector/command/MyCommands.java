@@ -32,7 +32,7 @@ public class MyCommands {
 	
 	@ShellMethod("Add two integers together.")
     public int db(int a, int b) throws Exception {
-		weidian.refreshAccessToken();
+		System.out.println(weidian.getAccessToken());
 		return 5;
 	}
 	
