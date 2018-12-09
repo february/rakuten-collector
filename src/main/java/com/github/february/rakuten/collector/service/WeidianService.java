@@ -3,6 +3,7 @@ package com.github.february.rakuten.collector.service;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,10 @@ import com.weidian.open.sdk.exception.OpenException;
 import com.weidian.open.sdk.oauth.OAuth;
 import com.weidian.open.sdk.request.product.MediaUploadRequest;
 import com.weidian.open.sdk.request.product.VdianItemAddRequest;
+import com.weidian.open.sdk.request.product.WeidianItemSearchRequest;
 import com.weidian.open.sdk.response.AbstractResponse;
 import com.weidian.open.sdk.response.oauth.OAuthResponse;
+import com.weidian.open.sdk.response.product.VdianItemSearchResponse;
 import com.weidian.open.sdk.util.JsonUtils;
 
 @Component
@@ -120,5 +123,37 @@ public final class WeidianService {
 	      } catch (OpenException e) {
 	    	  logger.error(item.getItemName() + " put on sale failed and cause of " + e.getMessage());
 	      }	    
+	}
+	
+	public Item[] searchItem(String keyWord) throws Exception {
+		List<Item> result = new ArrayList<Item>();
+		String accessToken = this.getAccessToken();
+	    try {
+	    	String fx = "1";
+	    	int page = 1;
+	    	int pageSize = 30;
+	    	int total = 0;
+	    	boolean isContinue = true;
+	    	while(isContinue) {
+	    		logger.info(keyWord + " search at page " + page);
+	    		VdianItemSearchResponse response = client.executeGet(new WeidianItemSearchRequest(accessToken, fx, keyWord, String.valueOf(page), String.valueOf(pageSize)));
+		        if (response.getStatus().getStatusCode() == 0) {
+		        	result.addAll(Arrays.asList(response.getResult().getItems()));
+		        	total = response.getResult().getTotal();
+		        	if((page * pageSize) < total) {
+		        		page ++;
+		        	} else {
+		        		isContinue = false;
+		        	}		        	
+		        } else {
+		        	logger.error(keyWord + " search failed and cause of " + response.getStatus().getStatusReason());
+		        }
+	    	}	    	
+	    } catch (OpenException e) {
+	    	logger.error(keyWord + " search failed and cause of " + e.getMessage());
+	    	throw e;
+	    }
+	    
+	    return result.toArray(new Item[0]);
 	}
 }

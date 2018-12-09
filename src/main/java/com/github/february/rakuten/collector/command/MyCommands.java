@@ -36,11 +36,12 @@ public class MyCommands {
 	
 	@ShellMethod("Add two integers together.")
     public int db(int a, int b) throws Exception {
-		weidian.uploadImage(new String[] {
-				"/Users/zhanghao/Downloads/www.jpeg",
-				"/Users/zhanghao/Downloads/www.jpeg"
-		});
+//		weidian.uploadImage(new String[] {
+//				"/Users/zhanghao/Downloads/www.jpeg",
+//				"/Users/zhanghao/Downloads/www.jpeg"
+//		});
 //		job.execute();
+		weidian.searchItem("订");
 		return 5;
 	}
 	
