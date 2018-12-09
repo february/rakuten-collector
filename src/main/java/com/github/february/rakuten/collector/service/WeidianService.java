@@ -16,7 +16,6 @@ import com.github.february.rakuten.collector.bean.Site;
 import com.github.february.rakuten.collector.entity.AccessTokenHistory;
 import com.github.february.rakuten.collector.repository.AccessTokenHistoryRepo;
 import com.weidian.open.sdk.AbstractWeidianClient;
-import com.weidian.open.sdk.DefaultWeidianClient;
 import com.weidian.open.sdk.entity.Item;
 import com.weidian.open.sdk.exception.OpenException;
 import com.weidian.open.sdk.oauth.OAuth;
@@ -33,6 +32,9 @@ public final class WeidianService {
 
 	@Autowired
 	private AccessTokenHistoryRepo accessTokenHistoryRepo;
+	
+	@Autowired
+	AbstractWeidianClient client;
 
 	private void refreshAccessToken() throws Exception {
 		logger.info("Refresh AccessToken from Weidian");
@@ -83,7 +85,6 @@ public final class WeidianService {
 	public String[] uploadImage(String[] paths) throws Exception {
 		List<String> urlList = new ArrayList<String>();
 		String accessToken = this.getAccessToken();
-		AbstractWeidianClient client = DefaultWeidianClient.getInstance();
 		for(String path : paths) {
 			try {
 				MediaUploadRequest request = new MediaUploadRequest(accessToken, this.getBytes(path));
@@ -105,7 +106,6 @@ public final class WeidianService {
 	
 	public void addItem(Item item) throws Exception {
 		String accessToken = this.getAccessToken();
-		AbstractWeidianClient client = DefaultWeidianClient.getInstance();
 	    try {
 	        AbstractResponse response = client.executePost(new VdianItemAddRequest(accessToken, item));
 	        if (response.getStatus().getStatusCode() == 0) {
