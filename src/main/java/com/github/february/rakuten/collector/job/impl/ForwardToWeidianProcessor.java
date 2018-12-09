@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.github.february.rakuten.collector.analyzer.impl.AbcMartAvailableShoeSizeAnalyzer;
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
 import com.github.february.rakuten.collector.job.Processor;
-import com.github.february.rakuten.collector.service.HttpService;
+import com.github.february.rakuten.collector.service.DefaultHttpService;
 import com.github.february.rakuten.collector.service.WeidianService;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
@@ -27,7 +27,7 @@ public final class ForwardToWeidianProcessor implements Processor<RakutenIchibaI
 	AbcMartAvailableShoeSizeAnalyzer analyzer;
 	
 	@Autowired
-	HttpService httpService;
+	DefaultHttpService httpService;
 	
 	@Autowired
 	WeidianService weidian;
@@ -38,7 +38,7 @@ public final class ForwardToWeidianProcessor implements Processor<RakutenIchibaI
 		List<RakutenIchibaItem> rakutenItems = input.getItems();
 		for(RakutenIchibaItem rakutenItem : rakutenItems) {
 			try {
-				String pageXml = httpService.getPage(rakutenItem.getItemUrl());
+				String pageXml = httpService.get(rakutenItem.getItemUrl());
 				AvailableShoeSize[] sizes = analyzer.analyze(pageXml);				
 				String[] urls = rakutenItem.getMediumImageUrls();
 				for(int i=0; i<urls.length; i++) {

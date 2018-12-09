@@ -9,7 +9,7 @@ import org.springframework.shell.standard.ShellMethod;
 import com.github.february.rakuten.collector.analyzer.impl.AbcMartAvailableShoeSizeAnalyzer;
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
 import com.github.february.rakuten.collector.job.impl.ForwardToWeidianJob;
-import com.github.february.rakuten.collector.service.HttpService;
+import com.github.february.rakuten.collector.service.DefaultHttpService;
 import com.github.february.rakuten.collector.service.WeidianService;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
@@ -20,8 +20,8 @@ import com.github.february.rakuten.sdk.service.RakutenService;
 public class MyCommands {
 	
 	@Autowired
-	HttpService httpService;	
-	
+	DefaultHttpService httpService;
+
 	@Autowired
 	RakutenService rakutenService;
 	
@@ -54,7 +54,7 @@ public class MyCommands {
 		List<RakutenIchibaItem> items = result.getItems();
 		for(RakutenIchibaItem item : items) {
 			System.out.println(item.getItemUrl());
-			String pageXml = httpService.getPage(item.getItemUrl());
+			String pageXml = httpService.get(item.getItemUrl());
 			AvailableShoeSize[] sizes = abcMartAvailableShoeSizeAnalyzer.analyze(pageXml);
 			for(AvailableShoeSize size : sizes) {
 				System.out.println(size.getValue());
@@ -78,7 +78,7 @@ public class MyCommands {
 
         String pageXml;
 		try {
-			pageXml = httpService.getPage("https://item.rakuten.co.jp/abc-mart/5735140002/");
+			pageXml = httpService.get("https://item.rakuten.co.jp/abc-mart/5735140002/");
 			AvailableShoeSize[] sizes = abcMartAvailableShoeSizeAnalyzer.analyze(pageXml);
 			for(AvailableShoeSize size : sizes) {
 				System.out.println(size.getValue());

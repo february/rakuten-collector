@@ -1,5 +1,25 @@
 {"properties": [
   {
+    "name": "http.pool_max_total",
+    "type": "java.lang.Integer",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
+    "name": "http.max_per_route",
+    "type": "java.lang.Integer",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
+    "name": "http.conn_timeout",
+    "type": "java.lang.Integer",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
+    "name": "http.read_timeout",
+    "type": "java.lang.Integer",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
     "name": "browser.tempFolder",
     "type": "java.lang.String",
     "description": "A description for 'browser.tempFolder'"
