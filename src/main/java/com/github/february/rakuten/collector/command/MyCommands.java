@@ -1,6 +1,9 @@
 package com.github.february.rakuten.collector.command;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
@@ -15,6 +18,7 @@ import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.sdk.service.RakutenService;
+import com.weidian.open.sdk.entity.Item;
 
 @ShellComponent
 public class MyCommands {
@@ -41,32 +45,60 @@ public class MyCommands {
 //				"/Users/zhanghao/Downloads/www.jpeg"
 //		});
 //		job.execute();
-		weidian.searchItem("订");
+		Item[] is = weidian.searchItem("RAKUTEN");
+		for(Item i : is) {
+			System.out.println(i.getItemName());
+		}
+		
+		
+//		Item item = new Item();
+//	    item.setItemName("RAKUTEN[]测试商品");
+//	    item.setImgs(new String[] {"http://wd.geilicdn.com/vshop163187074-1415608235762-1176009.png?w=480&h=0"});
+//	    item.setPrice("1.00");
+//	    item.setStock(100);
+//
+//	    Sku sku = new Sku();
+//	    sku.setTitle("测试型号1");
+//	    sku.setPrice("1.00");
+//	    sku.setStock(100);
+//	    item.setSkus(new Sku[] {sku});
+//	    
+//	    weidian.addItem(item);
+	    
 		return 5;
 	}
 	
 	@ShellMethod("Add two integers together.")
     public int dec(int a, int b) throws Exception {
-		RakutenIchibaItemSearchParam param = new RakutenIchibaItemSearchParam();
-		param.setShopCode("abc-mart");
-		param.setKeyword("キッズ スニーカー");
-		RakutenIchibaItemSearchResult result = rakutenService.ichibaItemSearch(param);
+		List<RakutenIchibaItemSearchResult> resultList = new ArrayList<RakutenIchibaItemSearchResult>();
+		int page = 1;
+		int pageCount = 1;
+		boolean isContinue = true;
+		while(isContinue) {
+			RakutenIchibaItemSearchParam param = new RakutenIchibaItemSearchParam();
+			param.setShopCode("abc-mart");
+			param.setKeyword("キッズ スニーカー");
+			param.setAvailability(1);
+			try {
+				RakutenIchibaItemSearchResult result = rakutenService.ichibaItemSearch(param);
+				resultList.add(result);
+				pageCount = result.getPageCount();
+			} catch (Exception e) {}
+			if(page >= pageCount) {
+				isContinue = false;
+			} else {
+				page++;
+			}
+		}
 		
-		List<RakutenIchibaItem> items = result.getItems();
-		for(RakutenIchibaItem item : items) {
-			System.out.println(item.getItemUrl());
-			String pageXml = httpService.get(item.getItemUrl());
-			AvailableShoeSize[] sizes = abcMartAvailableShoeSizeAnalyzer.analyze(pageXml);
-			for(AvailableShoeSize size : sizes) {
-				System.out.println(size.getValue());
+		Set<String> brands = new HashSet<String>();
+		
+		
+		for(RakutenIchibaItemSearchResult r : resultList) {
+			List<RakutenIchibaItem> is = r.getItems();
+			for(RakutenIchibaItem i : is) {
+				System.out.println(i.getItemName());
 			}
-			
-			String[] urls = item.getMediumImageUrls();
-			for(int i=0; i<urls.length; i++) {
-				urls[i] = urls[i].replace("?_ex=128x128", "");
-			}
-			
-			httpService.downloadJpg(urls);
 		}
 		
 		return a-b;
