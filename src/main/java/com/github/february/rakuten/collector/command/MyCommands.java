@@ -1,8 +1,10 @@
 package com.github.february.rakuten.collector.command;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.shell.standard.ShellMethod;
 
 import com.github.february.rakuten.collector.analyzer.impl.AbcMartAvailableShoeSizeAnalyzer;
 import com.github.february.rakuten.collector.bean.AvailableShoeSize;
+import com.github.february.rakuten.collector.bean.WeidianCate;
 import com.github.february.rakuten.collector.job.impl.ForwardToWeidianJob;
 import com.github.february.rakuten.collector.service.DefaultHttpService;
 import com.github.february.rakuten.collector.service.WeidianService;
@@ -18,6 +21,7 @@ import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.sdk.service.RakutenService;
+import com.weidian.open.sdk.entity.Cate;
 import com.weidian.open.sdk.entity.Item;
 
 @ShellComponent
@@ -37,6 +41,38 @@ public class MyCommands {
 	
 	@Autowired
 	AbcMartAvailableShoeSizeAnalyzer abcMartAvailableShoeSizeAnalyzer;
+	
+	@ShellMethod("Add two integers together.")
+    public int cat(int a) throws Exception {
+		Map<String, WeidianCate> result = new HashMap<String, WeidianCate>();
+		Cate[] e = weidian.getCategories(true);
+		for(Cate  i : e) {
+			if(i.getParentId().equals("0")) {
+				WeidianCate cate = new WeidianCate();
+				cate.setId(i.getCateId());
+				cate.setName(i.getCateName());
+				result.put(i.getCateName(), cate);
+			} else {
+				if(!result.containsKey(i.getParentCateName())) {
+					WeidianCate cate = new WeidianCate();
+					cate.setId(i.getParentId());
+					cate.setName(i.getParentCateName());
+					if(cate.getChildren() == null) {
+						cate.setChildren(new ArrayList<WeidianCate>());
+					}
+					result.put(i.getParentCateName(), cate);
+				}
+				
+				WeidianCate parent = result.get(i.getParentCateName());
+				WeidianCate me = new WeidianCate();
+				me.setId(i.getCateId());
+				me.setName(i.getCateName());
+				parent.getChildren().add(me);
+				result.put(i.getParentCateName(), parent);				
+			}
+		}
+		return 1;
+	}
 	
 	@ShellMethod("Add two integers together.")
     public int db(int a, int b) throws Exception {

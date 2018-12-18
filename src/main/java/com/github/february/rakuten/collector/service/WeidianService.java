@@ -17,14 +17,17 @@ import com.github.february.rakuten.collector.bean.Site;
 import com.github.february.rakuten.collector.entity.AccessTokenHistory;
 import com.github.february.rakuten.collector.repository.AccessTokenHistoryRepo;
 import com.weidian.open.sdk.AbstractWeidianClient;
+import com.weidian.open.sdk.entity.Cate;
 import com.weidian.open.sdk.entity.Item;
 import com.weidian.open.sdk.exception.OpenException;
 import com.weidian.open.sdk.oauth.OAuth;
 import com.weidian.open.sdk.request.product.MediaUploadRequest;
 import com.weidian.open.sdk.request.product.VdianItemAddRequest;
+import com.weidian.open.sdk.request.product.WeidianCateGetListRequest;
 import com.weidian.open.sdk.request.product.WeidianItemSearchRequest;
 import com.weidian.open.sdk.response.AbstractResponse;
 import com.weidian.open.sdk.response.oauth.OAuthResponse;
+import com.weidian.open.sdk.response.product.VdianCateGetListResponse;
 import com.weidian.open.sdk.response.product.VdianItemSearchResponse;
 import com.weidian.open.sdk.util.JsonUtils;
 
@@ -105,6 +108,22 @@ public final class WeidianService {
 			}
 		}
 		return urlList.toArray(new String[0]);
+	}
+	
+	public Cate[] getCategories(boolean showNoCate) throws Exception {
+		Cate[] result = new Cate[0];
+		String accessToken = this.getAccessToken();
+		try {
+			VdianCateGetListResponse response = client.executePost(new WeidianCateGetListRequest(accessToken, showNoCate));
+			if (response.getStatus().getStatusCode() == 0) {
+				result = response.getResult();
+			} else {
+	        	logger.error("get shop categories failed and cause of " + response.getStatus().getStatusReason());
+	        }
+		} catch (OpenException e) {
+	    	  logger.error("get shop categories failed and cause of " + e.getMessage());
+	      }	   
+		return result;
 	}
 	
 	public void addItem(Item item) throws Exception {
