@@ -2,6 +2,7 @@ package com.github.february.rakuten.collector.master;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +20,7 @@ public class CategoryMaster {
 	
 	@Bean
 	public Map<String, WeidianCate> wedianCategory() throws Exception {
-		Map<String, WeidianCate> result = new HashMap<String, WeidianCate>();
+		Map<String, WeidianCate> result = new ConcurrentHashMap<String, WeidianCate>();
 		Cate[] e = weidian.getCategories(true);
 		for(Cate  i : e) {
 			if(i.getParentId().equals("0")) {
@@ -33,7 +34,7 @@ public class CategoryMaster {
 					cate.setId(i.getParentId());
 					cate.setName(i.getParentCateName());
 					if(cate.getChildren() == null) {
-						cate.setChildren(new HashMap<String, WeidianCate>());
+						cate.setChildren(new ConcurrentHashMap<String, WeidianCate>());
 					}
 					result.put(i.getParentCateName(), cate);
 				}
