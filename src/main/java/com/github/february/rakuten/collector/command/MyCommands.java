@@ -1,7 +1,6 @@
 package com.github.february.rakuten.collector.command;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,6 @@ import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.sdk.service.RakutenService;
-import com.weidian.open.sdk.entity.Cate;
 import com.weidian.open.sdk.entity.Item;
 
 @ShellComponent
@@ -40,38 +38,17 @@ public class MyCommands {
 	WeidianService weidian;
 	
 	@Autowired
+	Map<String, String> brandsMap;
+	
+	@Autowired
 	AbcMartAvailableShoeSizeAnalyzer abcMartAvailableShoeSizeAnalyzer;
+	
+	@Autowired
+	Map<String, WeidianCate> wedianCategory;
 	
 	@ShellMethod("Add two integers together.")
     public int cat(int a) throws Exception {
-		Map<String, WeidianCate> result = new HashMap<String, WeidianCate>();
-		Cate[] e = weidian.getCategories(true);
-		for(Cate  i : e) {
-			if(i.getParentId().equals("0")) {
-				WeidianCate cate = new WeidianCate();
-				cate.setId(i.getCateId());
-				cate.setName(i.getCateName());
-				result.put(i.getCateName(), cate);
-			} else {
-				if(!result.containsKey(i.getParentCateName())) {
-					WeidianCate cate = new WeidianCate();
-					cate.setId(i.getParentId());
-					cate.setName(i.getParentCateName());
-					if(cate.getChildren() == null) {
-						cate.setChildren(new HashMap<String, WeidianCate>());
-					}
-					result.put(i.getParentCateName(), cate);
-				}
-				
-				WeidianCate parent = result.get(i.getParentCateName());
-				WeidianCate me = new WeidianCate();
-				String childName = i.getCateName().replace(parent.getName() + "-", "");
-				me.setId(i.getCateId());
-				me.setName(childName);
-				parent.getChildren().put(childName, me);
-				result.put(i.getParentCateName(), parent);				
-			}
-		}
+		System.out.println(brandsMap);
 		return 1;
 	}
 	
