@@ -1,7 +1,7 @@
 package com.github.february.rakuten.collector.bean;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Map;
 
 public class WeidianCate implements Serializable {
 
@@ -11,7 +11,7 @@ public class WeidianCate implements Serializable {
 	
 	private String name;
 	
-	private List<WeidianCate> children;
+	private Map<String, WeidianCate> children;
 
 	public String getId() {
 		return id;
@@ -29,11 +29,11 @@ public class WeidianCate implements Serializable {
 		this.name = name;
 	}
 
-	public List<WeidianCate> getChildren() {
+	public Map<String, WeidianCate> getChildren() {
 		return children;
 	}
 
-	public void setChildren(List<WeidianCate> children) {
+	public void setChildren(Map<String, WeidianCate> children) {
 		this.children = children;
 	}
 

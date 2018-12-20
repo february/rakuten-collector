@@ -58,16 +58,17 @@ public class MyCommands {
 					cate.setId(i.getParentId());
 					cate.setName(i.getParentCateName());
 					if(cate.getChildren() == null) {
-						cate.setChildren(new ArrayList<WeidianCate>());
+						cate.setChildren(new HashMap<String, WeidianCate>());
 					}
 					result.put(i.getParentCateName(), cate);
 				}
 				
 				WeidianCate parent = result.get(i.getParentCateName());
 				WeidianCate me = new WeidianCate();
+				String childName = i.getCateName().replace(parent.getName() + "-", "");
 				me.setId(i.getCateId());
-				me.setName(i.getCateName());
-				parent.getChildren().add(me);
+				me.setName(childName);
+				parent.getChildren().put(childName, me);
 				result.put(i.getParentCateName(), parent);				
 			}
 		}
