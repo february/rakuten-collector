@@ -93,11 +93,17 @@ public class MyCommands {
 			param.setShopCode("abc-mart");
 			param.setKeyword("キッズ スニーカー");
 			param.setAvailability(1);
+			param.setPage(page);			
 			try {
 				RakutenIchibaItemSearchResult result = rakutenService.ichibaItemSearch(param);
 				resultList.add(result);
 				pageCount = result.getPageCount();
-			} catch (Exception e) {}
+				
+				System.out.println("page=" + page + "/" + pageCount);
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			if(page >= pageCount) {
 				isContinue = false;
 			} else {

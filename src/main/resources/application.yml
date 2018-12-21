@@ -26,6 +26,6 @@ browser:
       maxWaitMillis: 5000
 http: 
   pool_max_total: 100
-  max_per_route: 100
+  max_per_route: 50
   conn_timeout: 60000
   read_timeout: 60000
