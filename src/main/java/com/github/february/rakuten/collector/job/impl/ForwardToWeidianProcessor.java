@@ -50,8 +50,8 @@ public final class ForwardToWeidianProcessor implements Processor<RakutenIchibaI
 				String[] imgUrls = weidian.uploadImage(paths);
 				
 				Item item = new Item();
-				
-			    item.setItemName(rakutenItem.getItemName());
+				String[] titleParts = new String[]{getCode(rakutenItem.getItemCode()), getBrand(rakutenItem.getItemName()), rakutenItem.getItemName()};
+			    item.setItemName(createTitle(titleParts));
 			    item.setItemDesc(rakutenItem.getItemCaption());
 			    item.setImgs(imgUrls);
 			    item.setPrice(String.valueOf(rakutenItem.getItemPrice()));
@@ -67,11 +67,29 @@ public final class ForwardToWeidianProcessor implements Processor<RakutenIchibaI
 			    }
 			    item.setSkus(skus.toArray(new Sku[0]));
 				items.add(item);
+				
+				Item[] is = weidian.searchItem(getCode(rakutenItem.getItemCode()));
+				for(Item i : is) {
+					weidian.removeItem(i);
+				}
 			} catch (Exception ex) {
 				logger.error(rakutenItem.getItemUrl() + " process failed and cause of " + ex.getMessage());
 			}
 		}
 		return items.toArray(new Item[0]);
+	}
+	
+	private String getCode(String code) {
+		String result = "[%s]";
+		return String.format(result, code);
+	}
+	private String createTitle(String[] args) {
+		String result = "%s %s - %s";
+		return String.format(result, args);
+	}
+	
+	private String getBrand(String title) {
+		return "";
 	}
 
 }

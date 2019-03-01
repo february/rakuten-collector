@@ -134,7 +134,6 @@ public class MyCommands {
 	    		"https://si.geilicdn.com/bj-vshop-161342673-1539829876409-1649872326_1440_1080.jpg.webp?w=750&h=750&cp=1"});
 	    item.setPrice("1.00");
 	    item.setStock(100);
-
 	    Sku sku = new Sku();
 	    sku.setTitle("测试型号1");
 	    sku.setPrice("1.00");
