@@ -20,6 +20,7 @@ import com.github.february.rakuten.sdk.bean.RakutenIchibaItem;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.sdk.service.RakutenService;
+import com.weidian.open.sdk.entity.Cate;
 import com.weidian.open.sdk.entity.Item;
 import com.weidian.open.sdk.entity.Sku;
 
@@ -145,6 +146,7 @@ public class MyCommands {
     
     @ShellMethod("Add two integers together.")
     public int truncate(int a) throws Exception {
+    	Cate[] cates = weidian.getCategories(true);
     	Item[] is = weidian.searchItem("RAKUTEN");
 		for(Item i : is) {
 			weidian.removeItem(i);

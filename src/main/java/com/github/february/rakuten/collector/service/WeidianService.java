@@ -24,6 +24,7 @@ import com.weidian.open.sdk.oauth.OAuth;
 import com.weidian.open.sdk.request.product.MediaUploadRequest;
 import com.weidian.open.sdk.request.product.VdianItemAddRequest;
 import com.weidian.open.sdk.request.product.VdianItemDeleteRequest;
+import com.weidian.open.sdk.request.product.VdianShopCateAddRequest;
 import com.weidian.open.sdk.request.product.WeidianCateGetListRequest;
 import com.weidian.open.sdk.request.product.WeidianItemSearchRequest;
 import com.weidian.open.sdk.response.AbstractResponse;
@@ -188,7 +189,18 @@ public final class WeidianService {
 		} catch (OpenException e) {
 	    	logger.error(item.getItemId() + " remove item failed and cause of " + e.getMessage());
 	    	throw e;
-	    }
-		
+	    }		
+	}
+	
+	public void addCategories(Cate[] cates) throws Exception {
+		String accessToken = this.getAccessToken();
+		try {
+			CommonResponse response = client.executePost(new VdianShopCateAddRequest(accessToken, cates));
+			if (response.getStatus().getStatusCode() != 0) {
+	        	logger.error("add shop categories failed and cause of " + response.getStatus().getStatusReason());
+	        }
+		} catch (OpenException e) {
+	    	  logger.error("add shop categories failed and cause of " + e.getMessage());
+	      }	   
 	}
 }
