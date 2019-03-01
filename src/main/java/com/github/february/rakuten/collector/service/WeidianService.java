@@ -23,9 +23,11 @@ import com.weidian.open.sdk.exception.OpenException;
 import com.weidian.open.sdk.oauth.OAuth;
 import com.weidian.open.sdk.request.product.MediaUploadRequest;
 import com.weidian.open.sdk.request.product.VdianItemAddRequest;
+import com.weidian.open.sdk.request.product.VdianItemDeleteRequest;
 import com.weidian.open.sdk.request.product.WeidianCateGetListRequest;
 import com.weidian.open.sdk.request.product.WeidianItemSearchRequest;
 import com.weidian.open.sdk.response.AbstractResponse;
+import com.weidian.open.sdk.response.CommonResponse;
 import com.weidian.open.sdk.response.oauth.OAuthResponse;
 import com.weidian.open.sdk.response.product.VdianCateGetListResponse;
 import com.weidian.open.sdk.response.product.VdianItemSearchResponse;
@@ -174,5 +176,19 @@ public final class WeidianService {
 	    }
 	    
 	    return result.toArray(new Item[0]);
+	}
+	
+	public void removeItem(Item item) throws Exception {
+		String accessToken = this.getAccessToken();
+		try {
+			CommonResponse response = client.executeGet(new VdianItemDeleteRequest(accessToken, item.getItemId()));
+			if (response.getStatus().getStatusCode() != 0) {
+	        	logger.error(item.getItemId() + " remove item failed and cause of " + response.getStatus().getStatusReason());
+	        }
+		} catch (OpenException e) {
+	    	logger.error(item.getItemId() + " remove item failed and cause of " + e.getMessage());
+	    	throw e;
+	    }
+		
 	}
 }

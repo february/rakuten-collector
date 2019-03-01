@@ -21,6 +21,7 @@ import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchParam;
 import com.github.february.rakuten.sdk.bean.RakutenIchibaItemSearchResult;
 import com.github.february.rakuten.sdk.service.RakutenService;
 import com.weidian.open.sdk.entity.Item;
+import com.weidian.open.sdk.entity.Sku;
 
 @ShellComponent
 public class MyCommands {
@@ -123,6 +124,34 @@ public class MyCommands {
 		
 		return a-b;
 	}
+	
+    @ShellMethod("Add two integers together.")
+    public int push(int a) throws Exception {
+		Item item = new Item();
+	    item.setItemName("RAKUTEN[]测试商品");
+	    item.setImgs(new String[] {
+	    		"https://si.geilicdn.com/weidian161342673-34220000016816a876630a217216_1069_945.jpg.webp?w=750&h=750&cp=1",
+	    		"https://si.geilicdn.com/bj-vshop-161342673-1539829876409-1649872326_1440_1080.jpg.webp?w=750&h=750&cp=1"});
+	    item.setPrice("1.00");
+	    item.setStock(100);
+
+	    Sku sku = new Sku();
+	    sku.setTitle("测试型号1");
+	    sku.setPrice("1.00");
+	    sku.setStock(100);
+	    item.setSkus(new Sku[] {sku});	    
+	    weidian.addItem(item);
+    	return 0;
+    }
+    
+    @ShellMethod("Add two integers together.")
+    public int truncate(int a) throws Exception {
+    	Item[] is = weidian.searchItem("RAKUTEN");
+		for(Item i : is) {
+			weidian.removeItem(i);
+		}
+    	return 0;
+    }
     
     @ShellMethod("Add two integers together.")
     public int add(int a, int b) {
