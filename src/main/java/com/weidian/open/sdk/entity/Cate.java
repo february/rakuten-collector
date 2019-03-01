@@ -18,7 +18,7 @@ public class Cate {
 	
 	@JsonProperty("parent_cate_name")
 	private String parentCateName;
-
+/*
 	@JsonProperty("cate_item_num")
 	private String cateItemNum;
 	
@@ -39,7 +39,7 @@ public class Cate {
 
 	@JsonProperty("child_cate")
 	private Cate[] childCate;
-
+*/
 	public String getParentId() {
 		return parentId;
 	}
@@ -79,7 +79,7 @@ public class Cate {
 	public void setParentCateName(String parentCateName) {
 		this.parentCateName = parentCateName;
 	}
-
+	/*
 	public String getCateItemNum() {
 		return cateItemNum;
 	}
@@ -135,4 +135,5 @@ public class Cate {
 	public void setChildCate(Cate[] childCate) {
 		this.childCate = childCate;
 	}
+	*/
 }

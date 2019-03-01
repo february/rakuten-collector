@@ -28,7 +28,12 @@ public class BrandConfig {
 	Map<String, String> brandsMap() {
 		Map<String, String> brandsMap = new HashMap<String, String>();
 		for(Brand brand : brands) {
-			brandsMap.put(brand.getJp(), brand.getCn().replace(" ", "　"));
+			if(brand.getCn().length() > 10) {
+				brandsMap.put(brand.getJp(), brand.getCn().substring(0, 9));
+			} else {
+				brandsMap.put(brand.getJp(), brand.getCn());
+			}
+			
 		}
 		
 		return brandsMap;

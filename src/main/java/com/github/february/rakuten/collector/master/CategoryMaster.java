@@ -21,6 +21,7 @@ public class CategoryMaster {
 	@Bean
 	public Map<String, WeidianCate> wedianCategory() throws Exception {
 		Map<String, WeidianCate> result = new ConcurrentHashMap<String, WeidianCate>();
+		/*
 		Cate[] e = weidian.getCategories(true);
 		for(Cate  i : e) {
 			if(i.getParentId().equals("0")) {
@@ -48,7 +49,7 @@ public class CategoryMaster {
 				result.put(i.getParentCateName(), parent);				
 			}
 		}
-		
+*/		
 		return result;
 	}
 }

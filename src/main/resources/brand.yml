@@ -1,13 +1,13 @@
 brands: 
   - {jp: 'アディダス', cn: 'ADIDAS'}
   - {jp: 'エアーライト', cn: 'AIR LIGHT'}
-  - {jp: 'アージレ バイ ルコライン', cn: 'AGILE BY RUCOLINE '}
-  - {jp: 'アルマス', cn: 'ALMAS '}
-  - {jp: 'アンビシャス', cn: 'AMBITIOUS '}
+  - {jp: 'アージレ バイ ルコライン', cn: 'AGILE BY RUCOLINE'}
+  - {jp: 'アルマス', cn: 'ALMAS'}
+  - {jp: 'アンビシャス', cn: 'AMBITIOUS'}
   - {jp: 'アンドレア＆ミケーレ', cn: 'ANDREA&MICHELE'}
-  - {jp: 'エリアフォルテ', cn: 'AREA FORTE '}
-  - {jp: 'アシックス', cn: 'ASICS '}
-  - {jp: 'アシックスタイガー', cn: 'ASICS TIGER '}
+  - {jp: 'エリアフォルテ', cn: 'AREA FORTE'}
+  - {jp: 'アシックス', cn: 'ASICS'}
+  - {jp: 'アシックスタイガー', cn: 'ASICS TIGER'}
   - {jp: 'アスレタ', cn: 'ATHLETA'}
   - {jp: 'ベースボールジャンキー', cn: 'BASEBALL JUNKY'}
   - {jp: 'ビルケンシュトック', cn: 'BIRKENSTOCK'}
@@ -19,14 +19,14 @@ brands:
   - {jp: 'クラークス', cn: 'CLARKS'}
   - {jp: 'コンバース', cn: 'CONVERSE'}
   - {jp: 'コルソナポレオーネ', cn: 'CORSO NAPOLEONE'}
-  - {jp: 'クロックス ', cn: 'CROCS '}
-  - {jp: 'ダブリュー', cn: 'DABLIU '}
-  - {jp: 'ダナー', cn: 'DANNER '}
+  - {jp: 'クロックス ', cn: 'CROCS'}
+  - {jp: 'ダブリュー', cn: 'DABLIU'}
+  - {jp: 'ダナー', cn: 'DANNER'}
   - {jp: 'ドクターマーチン', cn: 'DR.MARTENS'}
   - {jp: 'フラッグスタウン ', cn: 'FLAGS TOWN'}
   - {jp: 'グラビス', cn: 'GRAVIS'}
-  - {jp: 'ジャンカルロ・モレリ', cn: 'G.C.MORELLI '}
-  - {jp: 'ジョージコックス', cn: 'GEORGE COX '}
+  - {jp: 'ジャンカルロ・モレリ', cn: 'G.C.MORELLI'}
+  - {jp: 'ジョージコックス', cn: 'GEORGE COX'}
   - {jp: 'ジャンニルッソ', cn: 'GIANNI RUSSO'}
   - {jp: 'ゲッタグリップ', cn: 'GETTA GRIP'}
   - {jp: 'グリスポーツ', cn: 'GRISPORT'}
@@ -37,24 +37,24 @@ brands:
   - {jp: 'ジョーネフィス', cn: 'JOE NEPHIS'}
   - {jp: 'ジョリー・アンコール', cn: 'JOLI ENCORE'}
   - {jp: 'ルコックスポルティフ ', cn: 'LE COQ SPORTIF'}
-  - {jp: 'メレル', cn: 'MERRELL '}
+  - {jp: 'メレル', cn: 'MERRELL'}
   - {jp: 'ミネトンカ', cn: 'MINNETONKA'}
-  - {jp: 'ニューバランス', cn: 'NEW BALANCE '}
+  - {jp: 'ニューバランス', cn: 'NEW BALANCE'}
   - {jp: 'ニューロック', cn: 'NEW ROCK'}
-  - {jp: 'ナイキ', cn: 'NIKE '}
-  - {jp: 'ヌォーボ', cn: 'NUOVO '}
+  - {jp: 'ナイキ', cn: 'NIKE'}
+  - {jp: 'ヌォーボ', cn: 'NUOVO'}
   - {jp: 'ポルサ', cn: 'POLSA'}
-  - {jp: 'プーマ', cn: 'PUMA '}
-  - {jp: 'レッドウィング', cn: 'RED WING '}
-  - {jp: 'リーボック', cn: 'REEBOK '}
-  - {jp: 'ロックポート', cn: 'ROCKPORT '}
+  - {jp: 'プーマ', cn: 'PUMA'}
+  - {jp: 'レッドウィング', cn: 'RED WING'}
+  - {jp: 'リーボック', cn: 'REEBOK'}
+  - {jp: 'ロックポート', cn: 'ROCKPORT'}
   - {jp: 'サッカニー', cn: 'SAUCONY'}
   - {jp: 'シュンソク アキレス', cn: '瞬足'}
   - {jp: 'スカSKECHERS ', cn: 'SKA'}
   - {jp: 'スペリー トップサイダー', cn: 'SPERRY TOP-SIDER'}
-  - {jp: 'ステファノロッシ', cn: 'STEFANO ROSSI '}
-  - {jp: 'ティンバーランド', cn: 'TIMBERLAND '}
+  - {jp: 'ステファノロッシ', cn: 'STEFANO ROSSI'}
+  - {jp: 'ティンバーランド', cn: 'TIMBERLAND'}
   - {jp: 'トリッカーズ', cn: 'TRICKER’S'}
-  - {jp: 'ヴァンズ ', cn: 'VANS '}
+  - {jp: 'ヴァンズ ', cn: 'VANS'}
   - {jp: 'ウォークオーバー ', cn: 'WALK-OVER'}
   

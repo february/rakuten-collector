@@ -173,4 +173,21 @@ public class MyCommands {
 		
         return a + b;
     }
+    
+    @ShellMethod("Add two integers together.")
+    public int tt(int a) throws Exception {
+    	
+    	for(String key : brandsMap.keySet()) {
+    		List<Cate> cateList = new ArrayList<Cate>();
+    		Cate cate = new Cate();
+    		cate.setCateName(brandsMap.get(key));
+    		cate.setSortNum(1);
+    		cate.setParentId("127548608");
+    		cateList.add(cate);
+    		System.out.println(brandsMap.get(key));
+    		weidian.addCategories(cateList.toArray(new Cate[0]));
+    	}
+    	
+    	return 0;
+    }
 }
