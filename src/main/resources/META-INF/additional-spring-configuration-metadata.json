@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "http.pool_max_total",
+    "type": "java.lang.Integer",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
+    "name": "http.max_per_route",
+    "type": "java.lang.Integer",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
+    "name": "http.conn_timeout",
+    "type": "java.lang.Integer",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
+    "name": "http.read_timeout",
+    "type": "java.lang.Integer",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
+    "name": "browser.tempFolder",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.tempFolder'"
+  },
+  {
+    "name": "browser.webclient.pool.max-total",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.webclient.pool.max-total'"
+  },
+  {
+    "name": "browser.webclient.pool.max-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.webclient.pool.max-idle'"
+  },
+  {
+    "name": "browser.webclient.pool.min-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.webclient.pool.min-idle'"
+  },
+  {
+    "name": "browser.webclient.pool.max-wait-millis",
+    "type": "java.lang.String",
+    "description": "A description for 'browser.webclient.pool.max-wait-millis'"
+  }
+]}
